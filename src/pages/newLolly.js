@@ -2,6 +2,18 @@ import React, { useState, useRef } from "react"
 import Header from "../Components/Header"
 import Lolly from "../Components/Lolly"
 import "../styles/newlolly.css"
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { navigate } from "gatsby";
+
+
+const createLollyMutation = gql`
+    mutation createLolly($recipientName: String!, $message: String!, $senderName: String!, $flavourTop: String!, $flavourMiddle: String!,$flavourBottom: String!) {
+        createLolly(recipientName: $recipientName, message: $message, senderName: $senderName, flavourTop: $flavourTop, flavourMiddle: $flavourMiddle,flavourBottom: $flavourBottom) {
+            message
+            lollyPath
+        }
+    }
+`
 
 export default function Home() {
   const [color1, setColor1] = useState("#d52358");
@@ -12,11 +24,25 @@ export default function Home() {
   const messageRef = useRef();
   const senderRef = useRef();
 
-  const submitLollyForm = () => {
+  const [createLolly] = useMutation(createLollyMutation);
+
+  const submitLollyForm = async () => {
     console.log("clicked");
     console.log("color 1", color1);
     console.log("sender", senderRef.current.value);
-  }
+    const result = await createLolly({
+      variables : {
+          recipientName: recipientNameRef.current.value,
+          message : messageRef.current.value,
+          senderName: senderRef.current.value,
+          flavourTop: color1,
+          flavourMiddle: color2,
+          flavourBottom: color3
+      }
+  });
+  console.log("result form server = ",result);
+  navigate("/finalLolly");
+}
 
 
   return (
