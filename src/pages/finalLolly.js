@@ -3,16 +3,17 @@ import Header from "../Components/Header"
 import Lolly from "../Components/Lolly"
 import "../styles/finalLolly.css"
 
-export default function Home() {
+export default function FinalLolly(props) {
+  let detailsoflolly = props.detailsoflolly;
   return (
     <div className="container">
       <Header />
       <div className="Lollies">
-        <div>
+        <div className="flolly">
           <Lolly
-            fillLollyTop="#d52358"
-            fillLollyMiddle="#e95946"
-            fillLollyBottom="#deaa43"
+            fillLollyTop={detailsoflolly.color1}
+            fillLollyMiddle={detailsoflolly.color2}
+            fillLollyBottom={detailsoflolly.color3}
           />
         </div>
 
@@ -25,9 +26,11 @@ export default function Home() {
             </div>
             <div className="details"> 
                 <div className="detailsdiv">
-                    <h1>Receiver</h1>
-                    <p>Message</p>
-                    <h1>Sender</h1>
+                    <h2>To,</h2>
+                    <h2 className="receiver">Dear {detailsoflolly.recipientName}</h2>
+                    <p  className="message">"{detailsoflolly.message}"</p>
+                    <h3 className="sender">From</h3>
+                    <h3 className="sender">----{detailsoflolly.sender}</h3>
                 </div>
             </div>
         </div>

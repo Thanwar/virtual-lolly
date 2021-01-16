@@ -3,7 +3,7 @@ import Header from "../Components/Header"
 import Lolly from "../Components/Lolly"
 import "../styles/newlolly.css"
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { navigate } from "gatsby";
+import FinalLolly from "./finalLolly";
 
 
 const createLollyMutation = gql`
@@ -19,6 +19,11 @@ export default function Home() {
   const [color1, setColor1] = useState("#d52358");
   const [color2, setColor2] = useState("#e95946");
   const [color3, setColor3] = useState("#deaa43");
+  const [submitted, setsubmitted] = useState(false);
+  const [recipientName, setrecipientName] = useState("");
+  const [message, setmessage] = useState("");
+  const [sender, setsender] = useState("");
+
 
   const recipientNameRef = useRef();
   const messageRef = useRef();
@@ -30,6 +35,9 @@ export default function Home() {
     console.log("clicked");
     console.log("color 1", color1);
     console.log("sender", senderRef.current.value);
+    setrecipientName(recipientNameRef.current.value);
+    setmessage(messageRef.current.value);
+    setsender(senderRef.current.value);
     const result = await createLolly({
       variables : {
           recipientName: recipientNameRef.current.value,
@@ -41,9 +49,25 @@ export default function Home() {
       }
   });
   console.log("result form server = ",result);
-  navigate("/finalLolly");
+  setsubmitted(true);
 }
 
+  let detailsoflolly = {
+    color1 : color1,
+    color2 : color2,
+    color3 : color3,
+    recipientName: recipientName,
+    message : message,
+    sender: sender
+  }
+
+  if(submitted){
+    return(
+      <div>
+      <FinalLolly detailsoflolly={detailsoflolly} />
+      </div>
+    )
+  }
 
   return (
     <div>

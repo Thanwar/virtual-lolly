@@ -45,3 +45,23 @@ body{
 .detailsdiv{
     padding: 10px;
 }
+
+.receiver{
+    padding-left: 10px;
+    margin-left: 20px;
+}
+
+.message{
+    padding-left: 10px;
+    margin-left: 50px;
+}
+
+.sender{
+    padding-left: 10px;
+    margin-left: 200px;
+}
+
+.flolly
+{
+    margin-top: 70px;
+}
