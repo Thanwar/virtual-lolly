@@ -3,7 +3,7 @@ import Header from "../Components/Header"
 import Lolly from "../Components/Lolly"
 import "../styles/newlolly.css"
 import { gql, useMutation, useQuery } from "@apollo/client";
-import FinalLolly from "./finalLolly";
+import FinalLolly from "../Components/finalLolly";
 
 
 const createLollyMutation = gql`

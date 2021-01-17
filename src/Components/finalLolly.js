@@ -1,7 +1,7 @@
 import React from "react"
-import Header from "../Components/Header"
-import Lolly from "../Components/Lolly"
-import "../styles/finalLolly.css"
+import Header from "./Header"
+import Lolly from "./Lolly"
+import "./finalLolly.css"
 
 export default function FinalLolly(props) {
   let detailsoflolly = props.detailsoflolly;
